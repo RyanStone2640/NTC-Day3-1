@@ -1,0 +1,80 @@
+<script src="https://unpkg.com/vue@3"></script>
+<div id="app"> 
+  <h1>Simole Cauculator</h1>
+  <div>{{initValue}}</div>
+  <template v-for="number in numbers">
+    <button @click="clickNumber(number)">{{number}}</button>
+  </template>
+  </br>
+  <template v-for="operator in operators">
+    <button @click="clickOperator(operator)">{{operator}}</button>
+  </template>  
+</br>
+<button @click="reset()">reset</button>
+<button @click="total()">=</button>
+</div>
+<script>
+  Vue.createApp({
+   data(){
+    return{
+      numbers:[
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+      operators:[
+        "+", "-", "*", "/" 
+      ],
+      initValue: "0",
+      operator: '',
+      saveValue: '',
+      sum: ""
+    }},
+    computed: {
+    },
+    methods: {
+      clickNumber(number){
+        if(this.initValue == 0){
+          this.initValue = number
+        }
+        else{
+          this.initValue += number.toString();            
+        }
+        
+      },
+      reset(){
+        this.initValue = 0;
+      },
+     clickOperator(operator){
+       // console.log(operator);
+       this.operator = operator
+      this.saveValue = Number(this.initValue);
+       this.initValue = 0;
+       this.operator = operator
+     },
+      total(){
+        switch(this.operator){
+          case "+":
+            this.sum = Number(this.initValue)+ this.saveValue;
+            this.initValue = this.sum
+            break;
+
+          case "+":
+            this.sum = Number(this.initValue)+ this.saveValue;
+            this.initValue = this.sum
+            break;    
+
+          case "-":
+            this.sum = Number(this.initValue) - this.saveValue;
+            this.initValue = this.sum
+            break;
+            
+          case "*":
+            this.sum = Number(this.initValue) * this.saveValue;
+            this.initValue = this.sum
+            break;
+            
+          case "/":
+            this.sum = Number(this.initValue) / this.saveValue;
+            this.initValue = this.sum
+            break;            
+        }}}
+  }).mount('#app')
+</script>
